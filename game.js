@@ -468,8 +468,12 @@
   }
 
   function getDropInterval() {
-    const speedup = Math.min(linesCleared * 12, 600);
-    return Math.max(MIN_DROP_MS, BASE_DROP_MS - speedup);
+    // Speed increases both with cleared lines and with score.
+    // linesCleared contributes a steady speedup; score adds gradual difficulty.
+    const linesSpeed = Math.min(linesCleared * 12, 600);
+    const scoreSpeed = Math.min(Math.floor(score / 500) * 15, 500);
+    const totalSpeed = Math.min(linesSpeed + scoreSpeed, 800);
+    return Math.max(MIN_DROP_MS, BASE_DROP_MS - totalSpeed);
   }
 
   function hardDropStep() {
