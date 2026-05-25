@@ -45,7 +45,6 @@
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         overflow: hidden;
       }
-
       body {
         min-height: 100vh;
         display: flex;
@@ -53,7 +52,6 @@
         align-items: center;
         padding: 12px;
       }
-
       .app {
         width: min(100%, 520px);
         display: grid;
@@ -61,7 +59,6 @@
       }
 
       .topbar {
-        display: flex;
         justify-content: space-between;
         align-items: end;
         gap: 12px;
@@ -193,12 +190,13 @@
         pointer-events: none; /* let the button receive the events, not the icon */
       }
 
-      .control-btn svg {
+      .control-btn img {
         width: 1.1em;
         height: 1.1em;
         display: inline-block;
         vertical-align: middle;
-        fill: currentColor;
+        object-fit: contain;
+        filter: invert(1) hue-rotate(180deg) saturate(0); /* neutralize if needed; kept for dark theme fallback */
       }
 
       .control-btn.primary {
@@ -271,47 +269,17 @@
       </section>
 
       <section class="controls" aria-label="Управление игрой">
-        <button
-          class="control-btn"
-          id="leftBtn"
-          aria-label="Влево"
-          draggable="false"
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
-          </svg>
+        <button class="control-btn" id="leftBtn" aria-label="Влево" draggable="false">
+          <img src="src/icons/arrow_left.svg" alt="" draggable="false" aria-hidden="true">
         </button>
-        <button
-          class="control-btn"
-          id="rotateBtn"
-          aria-label="Повернуть"
-          draggable="false"
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path
-              d="M15.55 5.55A7 7 0 1 0 19 12h-2a5 5 0 1 1-1.46-3.54L18 10V4l-2.45 1.55z"
-            ></path>
-          </svg>
+        <button class="control-btn" id="rotateBtn" aria-label="Повернуть" draggable="false">
+          <img src="src/icons/change.svg" alt="" draggable="false" aria-hidden="true">
         </button>
-        <button
-          class="control-btn primary"
-          id="downBtn"
-          aria-label="Вниз"
-          draggable="false"
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path d="M12 16l-4-4h3V4h2v8h3z"></path>
-          </svg>
+        <button class="control-btn primary" id="downBtn" aria-label="Вниз" draggable="false">
+          <img src="src/icons/arrow_down.svg" alt="" draggable="false" aria-hidden="true">
         </button>
-        <button
-          class="control-btn"
-          id="rightBtn"
-          aria-label="Вправо"
-          draggable="false"
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"></path>
-          </svg>
+        <button class="control-btn" id="rightBtn" aria-label="Вправо" draggable="false">
+          <img src="src/icons/arrow_right.svg" alt="" draggable="false" aria-hidden="true">
         </button>
       </section>
 
