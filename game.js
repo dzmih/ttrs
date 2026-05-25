@@ -340,8 +340,31 @@
     }
 
     if (currentPiece) {
+      drawGhostPiece(currentPiece);
       drawPiece(currentPiece);
     }
+  }
+
+  function drawGhostPiece(piece) {
+    // clone piece position
+    const ghost = { ...piece };
+    // drop until invalid
+    while (isValidPosition(ghost, 0, 1, ghost.rotation)) {
+      ghost.y += 1;
+    }
+
+    // draw with semi-transparent effect
+    ctx.save();
+    ctx.globalAlpha = 0.28;
+    const blocks = SHAPES[ghost.type][ghost.rotation];
+    for (const [dx, dy] of blocks) {
+      const x = ghost.x + dx;
+      const y = ghost.y + dy;
+      if (y >= 0) {
+        drawCell(x, y, ghost.color);
+      }
+    }
+    ctx.restore();
   }
 
   function drawPiece(piece) {
