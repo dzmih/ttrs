@@ -14,7 +14,8 @@
   const ROWS = 20;
   const BASE_DROP_MS = 800;
   const MIN_DROP_MS = 120;
-  const SOFT_DROP_MS = 110;
+  const SOFT_DROP_MS = 200;
+  const SOFT_DROP_DELAY_MS = 180;
 
   const COLORS = {
     I: "#56d5ff",
@@ -223,6 +224,7 @@
   let dropAccumulator = 0;
   let softDrop = false;
   let softDropPieceId = null;
+  let softDropStartedAt = 0;
   let pieceIdCounter = 0;
   let cellSize = 30;
 
@@ -483,7 +485,10 @@
 
     dropAccumulator += delta;
     const softDropActive =
-      softDrop && currentPiece && softDropPieceId === currentPiece.id;
+      softDrop &&
+      currentPiece &&
+      softDropPieceId === currentPiece.id &&
+      performance.now() - softDropStartedAt >= SOFT_DROP_DELAY_MS;
     const interval = softDropActive ? SOFT_DROP_MS : getDropInterval();
 
     while (dropAccumulator >= interval && !gameOver) {
@@ -523,6 +528,7 @@
     dropAccumulator = 0;
     softDrop = false;
     softDropPieceId = null;
+    softDropStartedAt = 0;
     pieceIdCounter = 0;
     scoreEl.textContent = "0";
     hideGameOver();
@@ -562,10 +568,12 @@
       () => {
         softDrop = true;
         softDropPieceId = currentPiece ? currentPiece.id : null;
+        softDropStartedAt = performance.now();
       },
       () => {
         softDrop = false;
         softDropPieceId = null;
+        softDropStartedAt = 0;
       },
     );
 
@@ -579,6 +587,7 @@
       } else if (event.key === "ArrowDown") {
         softDrop = true;
         softDropPieceId = currentPiece ? currentPiece.id : null;
+        softDropStartedAt = performance.now();
       } else if (event.key === "ArrowUp" || event.key === "x") {
         rotatePiece();
       } else if (event.key === " " || event.key === "Spacebar") {
@@ -592,6 +601,7 @@
       if (event.key === "ArrowDown") {
         softDrop = false;
         softDropPieceId = null;
+        softDropStartedAt = 0;
       }
     });
   }
@@ -644,6 +654,7 @@
     canvas.addEventListener("pointerleave", () => {
       softDrop = false;
       softDropPieceId = null;
+      softDropStartedAt = 0;
     });
   }
 
