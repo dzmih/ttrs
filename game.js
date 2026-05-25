@@ -222,6 +222,8 @@
   let lastTime = 0;
   let dropAccumulator = 0;
   let softDrop = false;
+  let softDropPieceId = null;
+  let pieceIdCounter = 0;
   let cellSize = 30;
 
   function createBoard() {
@@ -245,6 +247,7 @@
 
   function createPiece(type = nextType()) {
     return {
+      id: ++pieceIdCounter,
       type,
       rotation: 0,
       x: 3,
@@ -479,7 +482,9 @@
     }
 
     dropAccumulator += delta;
-    const interval = softDrop ? SOFT_DROP_MS : getDropInterval();
+    const softDropActive =
+      softDrop && currentPiece && softDropPieceId === currentPiece.id;
+    const interval = softDropActive ? SOFT_DROP_MS : getDropInterval();
 
     while (dropAccumulator >= interval && !gameOver) {
       dropAccumulator -= interval;
@@ -517,6 +522,8 @@
     gameOver = false;
     dropAccumulator = 0;
     softDrop = false;
+    softDropPieceId = null;
+    pieceIdCounter = 0;
     scoreEl.textContent = "0";
     hideGameOver();
     refillBag();
@@ -554,9 +561,11 @@
       () => movePiece(0, 1),
       () => {
         softDrop = true;
+        softDropPieceId = currentPiece ? currentPiece.id : null;
       },
       () => {
         softDrop = false;
+        softDropPieceId = null;
       },
     );
 
@@ -581,6 +590,7 @@
     window.addEventListener("keyup", (event) => {
       if (event.key === "ArrowDown") {
         softDrop = false;
+        softDropPieceId = null;
       }
     });
   }
@@ -633,6 +643,7 @@
 
     canvas.addEventListener("pointerleave", () => {
       softDrop = false;
+      softDropPieceId = null;
     });
   }
 

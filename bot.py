@@ -8,6 +8,8 @@ from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, W
 
 router = Router()
 
+WEB_APP_URL = os.getenv("WEB_APP_URL", "HTTPS_URL_HERE")
+
 
 @router.message(CommandStart())
 async def start_handler(message: Message) -> None:
@@ -17,7 +19,7 @@ async def start_handler(message: Message) -> None:
             [
                 InlineKeyboardButton(
                     text="Открыть Тетрис",
-                    web_app=WebAppInfo(url="HTTPS_URL_HERE"),
+                    web_app=WebAppInfo(url=WEB_APP_URL),
                 )
             ]
         ]
