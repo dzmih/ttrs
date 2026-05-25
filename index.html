@@ -8,13 +8,6 @@
     />
     <meta name="theme-color" content="#111111" />
     <title>Tetris Mini App</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      integrity="sha512-pVn0Xw0YqKqkT2YQv7KZ0ZL8s3sZkq1V0z1l3K1n5G1s6v7h8J9K0l2m3n4o5p6q"
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
     <style>
       :root {
         color-scheme: light dark;
@@ -200,11 +193,12 @@
         pointer-events: none; /* let the button receive the events, not the icon */
       }
 
-      .control-btn i {
-        font-size: 20px;
+      .control-btn svg {
+        width: 1.1em;
+        height: 1.1em;
         display: inline-block;
-        width: 1em;
-        text-align: center;
+        vertical-align: middle;
+        fill: currentColor;
       }
 
       .control-btn.primary {
@@ -283,7 +277,9 @@
           aria-label="Влево"
           draggable="false"
         >
-          <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+          </svg>
         </button>
         <button
           class="control-btn"
@@ -291,7 +287,11 @@
           aria-label="Повернуть"
           draggable="false"
         >
-          <i class="fa-solid fa-rotate-right" aria-hidden="true"></i>
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path
+              d="M15.55 5.55A7 7 0 1 0 19 12h-2a5 5 0 1 1-1.46-3.54L18 10V4l-2.45 1.55z"
+            ></path>
+          </svg>
         </button>
         <button
           class="control-btn primary"
@@ -299,7 +299,9 @@
           aria-label="Вниз"
           draggable="false"
         >
-          <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M12 16l-4-4h3V4h2v8h3z"></path>
+          </svg>
         </button>
         <button
           class="control-btn"
@@ -307,7 +309,9 @@
           aria-label="Вправо"
           draggable="false"
         >
-          <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"></path>
+          </svg>
         </button>
       </section>
 
