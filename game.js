@@ -14,7 +14,7 @@
   const ROWS = 20;
   const BASE_DROP_MS = 800;
   const MIN_DROP_MS = 120;
-  const SOFT_DROP_MS = 45;
+  const SOFT_DROP_MS = 110;
 
   const COLORS = {
     I: "#56d5ff",
@@ -558,7 +558,7 @@
     bindButtonPress(rotateBtn, () => rotatePiece());
     bindButtonPress(
       downBtn,
-      () => movePiece(0, 1),
+      () => {},
       () => {
         softDrop = true;
         softDropPieceId = currentPiece ? currentPiece.id : null;
@@ -578,6 +578,7 @@
         movePiece(1, 0);
       } else if (event.key === "ArrowDown") {
         softDrop = true;
+        softDropPieceId = currentPiece ? currentPiece.id : null;
       } else if (event.key === "ArrowUp" || event.key === "x") {
         rotatePiece();
       } else if (event.key === " " || event.key === "Spacebar") {
@@ -633,8 +634,7 @@
       if (absY >= minDistance) {
         if (dy > 0) {
           softDrop = true;
-          hardDropStep();
-          softDrop = false;
+          softDropPieceId = currentPiece ? currentPiece.id : null;
         } else {
           rotatePiece();
         }
