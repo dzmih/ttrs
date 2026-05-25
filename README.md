@@ -1,34 +1,35 @@
-# Tetris Mini App
+# tetris mini app
 
-Статическая игра Тетрис для Telegram Mini App и бот на Python.
+static tetris game for telegram mini app and a bot in python
 
-## Что нужно для работы сайта
+## what is needed for the website to work
 
-- `index.html`
-- `game.js`
+* `index.html`
+* `game.js`
 
-Эти файлы можно публиковать как статический сайт на Cloudflare Pages.
+these files can be published as a static site on cloudflare pages
 
-## Настройка Cloudflare Pages
+## cloudflare pages setup
 
-1. Подключить GitHub-репозиторий.
-2. Указать root directory как корень репозитория.
-3. Build command оставить пустым.
-4. Output directory оставить пустым или `.`.
+1. connect github repository
+2. specify root directory as the root of the repository
+3. leave build command empty
+4. leave output directory empty or `.`
 
-## Что нужно для бота
+## what is needed for the bot
 
-- `bot.py`
-- `requirements.txt`
+* `bot.py`
+* `requirements.txt`
 
-### Запуск бота
+### running the bot
 
 ```powershell
 pip install -r requirements.txt
 $env:BOT_TOKEN="your_token_here"
 python bot.py
+
 ```
 
-## Важно
+## important
 
-В `bot.py` нужно заменить `HTTPS_URL_HERE` на реальный HTTPS-адрес опубликованной игры.
+in `bot.py` you need to replace `HTTPS_URL_HERE` with the actual HTTPS address of the published game
