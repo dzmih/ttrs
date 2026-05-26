@@ -4,8 +4,8 @@ static tetris game for telegram mini app and a bot in python
 
 ## what is needed for the website to work
 
-* `index.html`
-* `game.js`
+- `index.html`
+- `game.js`
 
 these files can be published as a static site on cloudflare pages
 
@@ -18,18 +18,21 @@ these files can be published as a static site on cloudflare pages
 
 ## what is needed for the bot
 
-* `bot.py`
-* `requirements.txt`
+- `bot.py`
+- `requirements.txt`
+
+The bot needs `WEB_APP_URL` set to the public HTTPS address of your Cloudflare Pages site.
 
 ### running the bot
 
 ```powershell
 pip install -r requirements.txt
 $env:BOT_TOKEN="your_token_here"
+$env:WEB_APP_URL="https://your-site.pages.dev"
 python bot.py
 
 ```
 
 ## important
 
-in `bot.py` you need to replace `HTTPS_URL_HERE` with the actual HTTPS address of the published game
+set `WEB_APP_URL` to the actual HTTPS address of the published game before starting the bot
